@@ -1,0 +1,30 @@
+body {
+	width:500px;
+	background-color:#FFFFFF;
+}
+.data {
+	margin-left:50px;
+}
+.label {
+	width:50px;
+	display:inline-block;
+}
+.stamp {
+	margin-left:10px;
+	font-size:80%;
+}
+#fm802 {
+	background-color:#00FFFF;
+	padding:10px 0px 10px 0px;
+}
+#FMO {
+	background-color:#FFB6C1;
+	padding:10px 0px 10px 0px;
+}
+#CCL {
+	background-color:#B0E0E6;
+	padding:10px 0px 10px 0px;
+}
+#listen {
+	float:right;
+}

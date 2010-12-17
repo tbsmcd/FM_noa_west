@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>FM Now Onair Kansai</title>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<script type="text/php">
+function get_noa ($station, $method) {
+	$url = 'http://radiko.jp/station/feed/' . $station . '/feed.xml';
+	$source = simplexml_load_file($url);
+	if ($method == 'artist') {
+		$data = $source->items->item->attributes()->artist;
+	} elseif ($method == 'title') {
+		$data = $source->items->item->attributes()->title;
+	}
+	 elseif ($method == 'stamp') {
+		$stamp = $source->items->item->attributes()->stamp;
+		$date = date_create($stamp);
+		$data = date_format($date, 'Y/m/d H:i:s');
+	}
+	return $data;
+}
+function last_update() {
+	return date('H:i:s');
+}
+</script>
+<script>
+window.onload = function() {
+	write_noa();
+	setInterval('write_noa()', 60000);
+}
+function write_noa () {
+	document.getElementById("802_title").innerText = get_noa('802', 'title');
+	document.getElementById("802_artist").innerText = get_noa('802', 'artist');
+	document.getElementById("802_stamp").innerText = get_noa('802', 'stamp');
+	document.getElementById("FMO_title").innerText = get_noa('FMO', 'title');
+	document.getElementById("FMO_artist").innerText = get_noa('FMO', 'artist');
+	document.getElementById("FMO_stamp").innerText = get_noa('FMO', 'stamp');
+	document.getElementById("CCL_title").innerText = get_noa('CCL', 'title');
+	document.getElementById("CCL_artist").innerText = get_noa('CCL', 'artist');
+	document.getElementById("CCL_stamp").innerText = get_noa('CCL', 'stamp');
+	document.getElementById("last_update").innerText = last_update();
+}
+</script>
+</head>
+<body>
+<img src="logo.png"> <a href="#" onclick="write_noa()"><img src="reload.png"></a> Last update:<span id=last_update></span>
+<div id="fm802">
+<img class="listen" src="listen.png" onclick="Titanium.Desktop.openURL('http://radiko.jp/player/player.html#802')">
+<span class="station">FM802</span><span class="stamp" id="802_stamp"></span>
+<div class="data"><div class="label">title:</div><span id="802_title"></span>
+<br /><div class="label">artist:</div><span id="802_artist"></span></div>
+</div>
+<div id="FMO">
+<img class="listen" src="listen.png" onclick="Titanium.Desktop.openURL('http://radiko.jp/player/player.html#FMO')">
+<span class="station">FM大阪</span><span class="stamp" id="FMO_stamp"></span>
+<div class="data"><div class="label">title:</div><span id="FMO_title"></span>
+<br /><div class="label">artist:</div><span id="FMO_artist"></span></div>
+</div>
+<div id="CCL">
+<img class="listen" src="listen.png" onclick="Titanium.Desktop.openURL('http://radiko.jp/player/player.html#CCL')">
+<span class="station">FM COCOLO</span><span class="stamp" id="CCL_stamp"></span>
+<div class="data"><div class="label">title:</div><span id="CCL_title"></span>
+<br /><div class="label">artist:</div><span id="CCL_artist"></span></div>
+</div>
+<img src="radiko.png" onclick="Titanium.Desktop.openURL('http://radiko.jp')">
+</body>
+
+</html>
