@@ -1,10 +1,10 @@
 #appname:FM_noa_west
 #appid:net.fool4.fm_noa_west
 #publisher:tbsmcd
-#image:default_app_logo.png
+#image:icon.png
 #url:http://prof.fool4.net/
 #guid:a33bce69-c736-490c-ac3f-50bbc1cb7d7a
-#desc:No description provided
+#desc:help your radiko-life.
 #type:desktop
 runtime:1.0.0
 api:1.0.0
